@@ -1,11 +1,11 @@
 import axios from "axios";
 import { NextPage } from "next";
-import { Head } from "next/document";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import ProductsPaginated from "../../interfaces/products-paginated.interface";
 
 interface Props {
-  products: Array<unknown>;
+  products: ProductsPaginated;
 }
 
 const Products: NextPage<Props> = ({ products }) => {

@@ -10,7 +10,7 @@ const ProductDetail: NextPage<Props> = ({ product }) => {
     <div>
       <h1>{product.title}</h1>
       <p>{product.description}</p>
-      <img src={product.photo_id} />
+      {/* <img src={product.photo_id} /> */}
     </div>
   );
 };
