@@ -1,7 +1,10 @@
 import axios from "axios";
 import { NextPage } from "next";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React from "react";
+import ProductCard from "../../components/productcard";
+import Product from "../../interfaces/product.interface";
+
 import ProductsPaginated from "../../interfaces/products-paginated.interface";
 
 interface Props {
@@ -15,12 +18,14 @@ const Products: NextPage<Props> = ({ products }) => {
         {products.data.length > 0 && (
           <div>
             <ul>
-              {products.data.map((product: any) => {
+              {products.data.map((product: Product) => {
                 return (
                   <div key={product.id}>
                     <li>
                       <Link href={`/products/${product.slug}`}>
-                        {product.title}
+                        <div style={{ width: "25%", cursor: "pointer" }}>
+                          <ProductCard product={product} />
+                        </div>
                       </Link>
                     </li>
                   </div>

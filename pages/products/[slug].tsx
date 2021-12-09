@@ -1,8 +1,10 @@
 import axios from "axios";
 import { NextPage } from "next";
+import Image from "next/image";
+import Product from "../../interfaces/product.interface";
 
 interface Props {
-  product: any;
+  product: Product;
 }
 
 const ProductDetail: NextPage<Props> = ({ product }) => {
@@ -10,7 +12,7 @@ const ProductDetail: NextPage<Props> = ({ product }) => {
     <div>
       <h1>{product.title}</h1>
       <p>{product.description}</p>
-      {/* <img src={product.photo_id} /> */}
+      <Image src={product.photo_id} width="400" height="200" />
     </div>
   );
 };
