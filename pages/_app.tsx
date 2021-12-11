@@ -1,13 +1,14 @@
 import "../styles/globals.css";
-import type { AppProps } from "next/app";
-import { useEffect } from "react";
-import TagManager from "react-gtm-module";
 
+import mixpanel from "mixpanel-browser";
+import { useEffect } from "react";
+
+import type { AppProps } from "next/app";
+import { MixpanelTracking } from "../servcies/mixpanel";
+import TrackingEvents from "../enums/tracking-events.enum";
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
-    TagManager.initialize({
-      gtmId: process.env.NEXT_PUBLIC_GTM_TAG || "",
-    });
+    MixpanelTracking.getInstance().track(TrackingEvents.PAGE_VIEW);
   }, []);
   return <Component {...pageProps} />;
 }

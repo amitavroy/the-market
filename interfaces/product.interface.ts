@@ -4,4 +4,5 @@ export default interface Product {
   description: string;
   slug: string;
   photo_id: string;
+  price: number;
 }
