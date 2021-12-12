@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Product from "../../interfaces/product.interface";
+import { ProductTitle } from "../elements/product-title";
 
 interface Props {
   product: Product;
@@ -9,9 +10,16 @@ interface Props {
 const ProductCard: React.FC<Props> = ({ product }) => {
   return (
     <div>
-      <h1>{product.title}</h1>
+      <div className="w-full">
+        <Image
+          src={product.photo_id}
+          width="400"
+          height="200"
+          className="w-full"
+        />
+      </div>
+      <ProductTitle title={product.title} />
       <p>{product.description}</p>
-      <Image src={product.photo_id} width="400" height="200" />
     </div>
   );
 };

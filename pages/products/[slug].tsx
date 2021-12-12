@@ -1,6 +1,8 @@
 import axios from "axios";
 import { NextPage } from "next";
-import Image from "next/image";
+
+import { Layout } from "../../components/layout";
+import ProductCard from "../../components/productcard";
 import Product from "../../interfaces/product.interface";
 
 interface Props {
@@ -9,11 +11,16 @@ interface Props {
 
 const ProductDetail: NextPage<Props> = ({ product }) => {
   return (
-    <div>
-      <h1>{product.title}</h1>
-      <p>{product.description}</p>
-      <Image src={product.photo_id} width="400" height="200" />
-    </div>
+    <Layout>
+      <div className="my-6">
+        <ProductCard product={product} />
+      </div>
+      <div>
+        <button className="p-3 bg-green-700 rounded text-white">
+          Add to Cart
+        </button>
+      </div>
+    </Layout>
   );
 };
 
