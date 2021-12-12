@@ -1,11 +1,9 @@
 import axios from "axios";
-import mixpanel from "mixpanel-browser";
 import { NextPage } from "next";
-import Image from "next/image";
-import Link from "next/link";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 
-import TrackingEvents from "../../enums/tracking-events.enum";
+import { Layout } from "../../components/layout";
+import ProductCard from "../../components/productcard";
 import Product from "../../interfaces/product.interface";
 import { MixpanelTracking } from "../../servcies/mixpanel";
 
@@ -18,19 +16,19 @@ const ProductDetail: NextPage<Props> = ({ product }) => {
     MixpanelTracking.getInstance().productViewed(product);
   }, []);
   return (
-    <div>
-      <small>
-        <Link href="/products">Back to home</Link>
-      </small>
-      <h1>{product.title}</h1>
-      <p>{product.description}</p>
-      <Image src={product.photo_id} width="400" height="200" />
-      <button
-        onClick={() => MixpanelTracking.getInstance().addedToCart(product)}
-      >
-        Add to cart
-      </button>
-    </div>
+    <Layout>
+      <div className="my-6">
+        <ProductCard product={product} />
+      </div>
+      <div>
+        <button
+          className="p-3 bg-green-700 rounded text-white"
+          onClick={() => MixpanelTracking.getInstance().addedToCart(product)}
+        >
+          Add to Cart
+        </button>
+      </div>
+    </Layout>
   );
 };
 
