@@ -22,11 +22,30 @@ export class GTMService {
     TagManager.initialize(tagManagerArgs);
   }
 
+  public userLoggedIn(userId: string) {
+    TagManager.dataLayer({
+      dataLayer: {
+        event: "login",
+        userId: userId,
+      },
+    });
+  }
+
   public productViewed(product: Product) {
     TagManager.dataLayer({
       dataLayer: {
         event: "productViewed",
         userId: "rhkg3",
+        productId: product.id,
+      },
+    });
+  }
+
+  public productAddedToCart(product: Product, userId: string) {
+    TagManager.dataLayer({
+      dataLayer: {
+        event: "addedToCart",
+        userId,
         productId: product.id,
       },
     });

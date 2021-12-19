@@ -2,26 +2,20 @@ import "../styles/globals.css";
 
 import { useEffect } from "react";
 
-import TrackingEvents from "../enums/tracking-events.enum";
-import { MixpanelTracking } from "../servcies/mixpanel";
+import { GTMService } from "../servcies/gtm.service";
 
 import type { AppProps } from "next/app";
-import TagManager from "react-gtm-module";
+import { CookiesProvider } from "react-cookie";
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
-    const tagManagerArgs = {
-      gtmId: "GTM-PPPGZ68",
-    };
-    TagManager.initialize(tagManagerArgs);
-    TagManager.dataLayer({
-      dataLayer: {
-        event: "my_view",
-        userId: "rhkg3",
-      },
-    });
-    MixpanelTracking.getInstance().track(TrackingEvents.PAGE_VIEW);
+    GTMService.getInstance();
+    // MixpanelTracking.getInstance().track(TrackingEvents.PAGE_VIEW);
   }, []);
-  return <Component {...pageProps} />;
+  return (
+    <CookiesProvider>
+      <Component {...pageProps} />
+    </CookiesProvider>
+  );
 }
 
 export default MyApp;
