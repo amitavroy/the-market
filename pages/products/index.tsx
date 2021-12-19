@@ -8,6 +8,7 @@ import ProductCard from "../../components/productcard";
 import TrackingEvents from "../../enums/tracking-events.enum";
 import Product from "../../interfaces/product.interface";
 import ProductsPaginated from "../../interfaces/products-paginated.interface";
+import { GTMService } from "../../servcies/gtm.service";
 import { MixpanelTracking } from "../../servcies/mixpanel";
 
 interface Props {
@@ -18,6 +19,9 @@ const Products: NextPage<Props> = ({ products }) => {
   useEffect(() => {
     MixpanelTracking.getInstance().track(TrackingEvents.PAGE_VIEW);
   }, []);
+  const productView = (product: Product) => {
+    GTMService.getInstance().productViewed(product);
+  };
   return (
     <Layout>
       <main className="grid grid-cols-2 gap-16">
@@ -26,7 +30,10 @@ const Products: NextPage<Props> = ({ products }) => {
             return (
               <div key={product.id}>
                 <Link href={`/products/${product.slug}`}>
-                  <a className="cursor-pointer">
+                  <a
+                    className="cursor-pointer"
+                    onClick={() => productView(product)}
+                  >
                     <ProductCard product={product} />
                   </a>
                 </Link>

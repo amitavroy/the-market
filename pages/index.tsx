@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import TagManager from "react-gtm-module";
 import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
@@ -35,6 +36,22 @@ const Home: NextPage = () => {
             <h2>Learn &rarr;</h2>
             <p>Learn about Next.js in an interactive course with quizzes!</p>
           </a>
+          <p
+            onClick={() => {
+              const tagManagerArgs = {
+                gtmId: "GTM-PPPGZ68",
+              };
+              TagManager.initialize(tagManagerArgs);
+              TagManager.dataLayer({
+                dataLayer: {
+                  event: "my_click",
+                  userId: "rhkg3",
+                },
+              });
+            }}
+          >
+            Check
+          </p>
         </div>
       </main>
 
