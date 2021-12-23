@@ -1,0 +1,9 @@
+version: "3"
+services:
+  webclient:
+    build: .
+    container_name: themarket_web
+    ports:
+      - 3000:3000
+    volumes:
+      - ./:/home/app
